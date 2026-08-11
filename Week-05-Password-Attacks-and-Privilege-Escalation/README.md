@@ -28,7 +28,7 @@ hydra -l nawal -P ~/custom.txt ssh://192.168.219.129
 1 of 1 target successfully completed, 1 valid password found
 \`\`\`
 
-📸 `screenshots/01-hydra-ssh-bruteforce.png`
+![Hydra SSH Bruteforce](screenshots/01-hydra-ssh-bruteforce.png)
 
 **Finding:** SSH account `nawal` was protected by a weak, easily guessable
 password, allowing successful brute-force in seconds using a small custom
@@ -53,7 +53,7 @@ transcription errors:
 scp nawal@192.168.219.129:~/myhash.txt ~/hash.txt
 \`\`\`
 
-📸 `screenshots/02-shadow-hash-extraction.png`
+![Shadow Hash Extraction](screenshots/02-shadow-hash-extraction.png)
 
 ---
 
@@ -73,7 +73,7 @@ cyber@2.0    (nawal)
 1 password hash cracked, 0 left
 \`\`\`
 
-📸 `screenshots/03-john-the-ripper-crack.png`
+![John the Ripper Crack](screenshots/03-john-the-ripper-crack.png)
 
 **Finding:** The SSH password was successfully cracked offline, confirming
 the account uses a weak, low-entropy password vulnerable to both online and
@@ -101,7 +101,7 @@ chmod +x linpeas.sh
 less -R linpeas_output.txt
 \`\`\`
 
-📸 `screenshots/04-linpeas-enumeration.png`
+![LinPEAS Enumeration](screenshots/04-linpeas-enumeration.png)
 
 **Notable findings during enumeration:**
 - `pkexec` binary has the SUID bit set (version 127 — patched against
@@ -126,7 +126,7 @@ whoami   # root
 id       # uid=0(root) gid=0(root) groups=0(root)
 \`\`\`
 
-📸 `screenshots/05-root-privilege-escalation.png`
+![Root Privilege Escalation](screenshots/05-root-privilege-escalation.png)
 
 **Finding:** The low-privileged user `nawal` was configured with blanket
 `ALL:ALL ALL` sudo rights, allowing immediate and trivial escalation to root
