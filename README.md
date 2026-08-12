@@ -20,7 +20,7 @@ hacking fundamentals — from reconnaissance to a full penetration test capstone
 | `Week-05-Password-Attacks-and-Privilege-Escalation` | Hydra, John the Ripper, LinPEAS, sudo misconfig exploitation |
 | `Week-06-Exploitation-Frameworks-and-Reporting` | Metasploit, BloodHound, CrackMapExec |
 | `Capstone-Full-Penetration-Test` | Full scoped pentest + professional report |
-
+| `Mini-Project-OWASP-Juice-Shop-Automation` | Custom Python tool automating OWASP Top 10:2025 testing against Juice Shop |
 Each week folder contains:
 - `README.md` — write-up of the task, methodology, and findings
 - `screenshots/` — evidence of each step
